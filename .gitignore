@@ -35,3 +35,12 @@ out/
 
 ### VS Code ###
 .vscode/
+
+
+### 환경 변수 ###
+/src/main/resources/env.properties
+.env
+
+### data ###
+es_data
+mysql_data

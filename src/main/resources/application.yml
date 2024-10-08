@@ -1,0 +1,37 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: ${MYSQL_URL}
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        slow_sql: true
+        format_sql: true
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+
+springdoc:
+  swagger-ui:
+    path: /api/v1 # ?? ??
+    groups-order: DESC # ????
+    tags-sorter: alpha # ???? ??
+    operations-sorter: method # ??? ? ??
+    disable-swagger-default-url: true
+    display-request-duration: true
+  api-docs:
+    path: /api/v1/api-docs
+  show-actuator: true
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  writer-with-default-pretty-printer: true # ???
+#  paths-to-match:
+#    - /api/v1/**
