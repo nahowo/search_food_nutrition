@@ -38,6 +38,23 @@ services:
     networks:
       - my_network
 
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.10.2 # ES 버전과 동일해야 함
+    container_name: logstash-container
+    volumes:
+      - ./libs/mysql-connector-j-9.0.0.jar:/usr/share/logstash/libs/mysql-connector-j-9.0.0.jar
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+      - ./libs/mysql-connector-j-9.0.0.jar:/usr/share/logstash/mysql-connector-j-9.0.0.jar
+    ports:
+      - "5044:5044"
+    environment:
+      - "XPACK_MONITORING_ENABLED=false"
+      - JDBC_CONNECTION_STRING=${JDBC_CONNECTION_STRING}
+      - JDBC_USER=${JDBC_USER}
+      - JDBC_PASSWORD=${JDBC_PASSWORD}
+    networks:
+      - my_network
+
 networks:
   my_network:
     driver: bridge
