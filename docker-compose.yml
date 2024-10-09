@@ -20,8 +20,8 @@ services:
     volumes:
       - ./mysql_data:/var/lib/mysql
 
-  elasticearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
     container_name: elasticsearch-container
     environment:
       - discovery.type=single-node
@@ -39,7 +39,7 @@ services:
       - my_network
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:7.10.2 # ES 버전과 동일해야 함
+    image: docker.elastic.co/logstash/logstash:7.17.0 # ES 버전과 동일해야 함
     container_name: logstash-container
     volumes:
       - ./libs/mysql-connector-j-9.0.0.jar:/usr/share/logstash/libs/mysql-connector-j-9.0.0.jar
@@ -52,6 +52,16 @@ services:
       - JDBC_CONNECTION_STRING=${JDBC_CONNECTION_STRING}
       - JDBC_USER=${JDBC_USER}
       - JDBC_PASSWORD=${JDBC_PASSWORD}
+    networks:
+      - my_network
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.0
+    container_name: kibana-container
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
     networks:
       - my_network
 
