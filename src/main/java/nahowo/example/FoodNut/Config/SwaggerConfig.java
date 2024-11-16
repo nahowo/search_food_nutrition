@@ -17,7 +17,7 @@ public class SwaggerConfig {
     private Info apiInfo() {
         return new Info()
                 .title("Food Nutrition API")
-                .description("[ Base URL: http://localhost:8080/api/v1]\\n\\nFoodnutrition의 API 문서")
+                .description("[ Base URL: http://localhost:8080/api/v1 ]\n\nFoodnutrition의 API 문서")
                 .version("1.0.0");
     }
 }
